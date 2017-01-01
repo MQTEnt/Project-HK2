@@ -1,0 +1,15 @@
+#page-wrapper{
+	padding-top: 65px;
+}
+#side-menu{
+	margin-top: 60px;
+}
+.list-item{
+	margin-top: 10px;
+}
+.list-item table td{
+	cursor: pointer;
+}
+.pages{
+	text-align: center;
+}
