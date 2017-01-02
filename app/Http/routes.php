@@ -15,13 +15,8 @@ Route::get('/', function () {
     return view('admin.region');
 });
 //API
-Route::get('/get-cities', function(){
-	$cities = App\City::all();
-	return $cities;
-});
-Route::get('/get-districts', function(){
-	$districts = App\District::all();
-	return $districts;
+Route::get('/get-cities-districts', function(){
+	return App\City::with('districts')->get();
 });
 
 //Admin Route

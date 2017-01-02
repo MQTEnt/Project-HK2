@@ -16,7 +16,7 @@
 	ul#list li{
 		margin-bottom: 2%;
 	}
-	#li-btn{
+	.li-none{
 		list-style-type:none;
 	}
 	.label-district{
@@ -28,29 +28,28 @@
 </style>
 @stop
 @section('body.content')
-<section class="content">
+<section class="content" ng-app="regionApp" ng-controller="regionCtrl">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-4">
-				<ul id="list">
-					<li id="li-btn"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Thêm mới</button></li>
-					@foreach($cities as $city)
+				<ul>
+					<li class="li-none"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Thêm mới</button></li>
+					<li class="li-none"><loading></loading></li>
+				</ul>
+				<ul id="list" ng-repeat="city in cities" on-finish-render>
 					<li>
-						<span class="li-city label label-primary">{{$city->name}}</span>
+						<span class="li-city label label-primary"> <% city.name %> </span>
 					</li>
 					<ul class="ul-district">
-						@foreach($city->districts as $district)
-						<li>
-							<span class="li-district label label-district">{{$district->name}}</span>
+						<li ng-repeat="district in city.districts">
+							<span class="li-district label label-district"> <% district.name %></span>
 						</li>
-						<ul class="ul-town">
+						<!-- <ul class="ul-town">
 							<li class="li-town"><span class="label label-town">abc</span></li>
 							<li class="li-town"><span class="label label-town">abc</span></li>
 							<li class="li-town"><span class="label label-town">abc</span></li>
-						</ul>
-						@endforeach
+						</ul> -->
 					</ul>
-					@endforeach
 				</ul>
 			</div>
 			<div class="col-sm-8">
@@ -65,16 +64,55 @@
 	</div>
 </section>
 <script>
-	$('document').ready(function(){
-		$('.ul-district').hide();
-		$('.ul-town').hide();
-
-		$('.li-city').click(function(){
-			$(this).parent().next().toggle();
-		});
-		$('.li-district').click(function(){
-			$(this).parent().next().toggle();
-		});
+</script>
+<script>
+	var app = angular.module('regionApp', [], function($interpolateProvider){
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    });
+    //Wait Angular Render
+	app.directive('onFinishRender', function ($timeout) {
+		return {
+			link: function (scope, element, attr) {
+				if (scope.$last === true) {
+					$timeout(function () {
+						scope.$emit('ngRepeatFinished');
+					});
+				}
+			}
+		}
 	});
+	app.directive('loading', function () {
+		return {
+			restrict: 'E',
+			replace:true,
+			template: '<div class="loading"><img src="/imgs/loading.gif" width="50" height="50" />LOADING...</div>',
+			link: function (scope, element, attr) {
+				scope.$watch('loading', function (val) {
+					if (val)
+						$(element).show();
+					else
+						$(element).hide();
+				});
+			}
+		}
+	});
+    app.controller('regionCtrl',function($scope, $http){
+    	$scope.loading = true;
+    	$scope.getRegion = function(){
+	    	$http.get("/get-cities-districts")
+	    	.then(function(response) {
+	    		$scope.cities = response.data;
+	    		$scope.loading = false;
+	    		$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent){
+					$('.ul-district').hide();
+					$('.li-city').click(function(){
+						$(this).parent().next().toggle();
+					});
+	    		});
+	    	});
+    	}
+    	$scope.getRegion();
+    });
 </script>
 @stop
