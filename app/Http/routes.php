@@ -14,13 +14,23 @@
 Route::get('/', function () {
     return view('admin.region');
 });
-//API
+
+/*
+* API
+*/
 Route::get('/get-cities-districts', function(){
-	return App\City::with('districts')->get();
+	return App\City::with('districts', 'districts.towns')->get();
+});
+Route::get('/town/{town_id}', function($town_id){
+	return App\Town::find($town_id);
 });
 
-//Admin Route
+/*
+* Admin Route
+*/
 Route::group(['prefix' => 'admin'], function(){
 	//Region
 	Route::get('region', ['as' => 'region.index', 'uses' => 'RegionController@index']);
+	//Town
+	Route::post('towns', 'TownController@store');
 });

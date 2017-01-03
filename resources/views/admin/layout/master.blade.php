@@ -33,6 +33,7 @@
 
     <!-- AngularJS -->
     <script src="/js/angular.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBJZuC9pIER2R-A1bHmIU9swuSfGclEHSk"></script>
     </head>
 
     <body>
