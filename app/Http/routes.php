@@ -33,4 +33,6 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('region', ['as' => 'region.index', 'uses' => 'RegionController@index']);
 	//Town
 	Route::post('towns', 'TownController@store');
+	Route::post('towns/{town_id}', 'TownController@update');
+	Route::delete('towns/{town_id}', 'TownController@destroy');
 });

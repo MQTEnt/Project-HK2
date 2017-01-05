@@ -67,8 +67,8 @@
 				</div>
 				<br>
 				<div id="btn" class="row">
-					<button id="btn-update" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-wrench"></span> Cập nhật</button>
-					<button id="btn-delete" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
+					<button id="btn-update" type="button" class="btn btn-warning" ng-click="update()" ng-disabled="!myForm.town_name.$valid"><span class="glyphicon glyphicon-wrench"></span> Cập nhật</button>
+					<button id="btn-delete" type="button" class="btn btn-danger" ng-click="delete()"><span class="glyphicon glyphicon-trash"></span> Xóa</button>
 				</div>
 				<br>
 				<div id="pn-info" class="row">
@@ -87,12 +87,16 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label">Tên xã:</label>
 									<div class="col-sm-8">
-										<input type="text" class="form-control" ng-model="selectedTown.name">
+										<form name="myForm">
+											<input name="town_name" type="text" class="form-control" ng-model="selectedTown.name" required> 
+											<span ng-show="!myForm.town_name.$valid && myForm.town_name.$dirty" style="color: red">Không được để trống tên</span>
+										</form>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-sm-10">
-										<button id="btn-create" type="button" class="btn btn-success pull-right" ng-click="store()">Tạo</button>
+										<button id="btn-locat" type="button" class="btn btn-success pull-right" ng-click="editLngLat()">Đổi tọa độ</button>
+										<button id="btn-create" type="button" class="btn btn-success pull-right" ng-click="store()" ng-disabled="!myForm.town_name.$valid">Tạo</button>
 									</div>
 								</div>
 							</div>
@@ -117,6 +121,7 @@
 			{
 				$('#btn-update').show();
 				$('#btn-delete').show();
+				$('#btn-locat').show();
 				$('#town-id').show()
 				$("#pn-info").slideDown("slow");
 				$("#btn-create").hide();
@@ -125,6 +130,7 @@
 				if(mode == 'create'){
 					$('#btn-update').hide();
 					$('#btn-delete').hide();
+					$('#btn-locat').hide();
 					$('#town-id').hide();
 					$("#pn-info").slideDown("slow");
 					$("#btn-create").show();
@@ -139,8 +145,8 @@
 	var newLocation;
 	var selectedDistrict ={}
 	var reloadRegion = false;
-	function placeMarker(map, location) {
-		if(typeof marker !='undefined') //Vì lần đầu tiên marker undefined nên không dùng được setMap()
+	function placeNewMarker(map, location){
+		if(typeof marker !='undefined')
 		{
 			marker.setMap(null);
 		}
@@ -151,7 +157,7 @@
 		//Set newLocation for add new
 		newLocation = location;
 		var infowindow = new google.maps.InfoWindow({
-			content: 'Chọn một địa điêm cho huyện <b>'+selectedDistrict.name+'</b>'
+			content: 'Đã chọn một địa điêm tại huyện <b>'+selectedDistrict.name+'</b>'
 		});
 		infowindow.open(map,marker);
 	}
@@ -162,7 +168,7 @@
 		});
 		if(mapMode == 'create')
 			google.maps.event.addListener(map, 'click', function(event) {
-				placeMarker(map, event.latLng);
+				placeNewMarker(map, event.latLng);
 			});
 	}
 	function initTownMap(lat, lon) {
@@ -175,8 +181,21 @@
 			map: map,
           	draggable: true, 
           	animation: google.maps.Animation.DROP
-         });
+        });
 		marker.addListener('click', toggleBounce);
+		//Event click to change LngLat
+		google.maps.event.addListener(map, 'click', function(event) {
+			if (mapMode == 'editLngLat'){
+				if(typeof marker != 'undefined')
+					marker.setMap(null);
+				marker = new google.maps.Marker({
+					position: event.latLng,
+					map: map,
+					draggable: true, 
+					animation: google.maps.Animation.DROP
+				});
+			}
+		});
 	}
 	function toggleBounce() {
         if (marker.getAnimation() !== null) {
@@ -246,7 +265,9 @@
 		    	}
 	    	});
     	}
+    	//Fistly, get list region
     	$scope.getRegion();
+
     	$scope.getTown = function(town_id){
     		$http.get("/town/"+town_id)
 	    	.then(function(response) {
@@ -303,10 +324,66 @@
     			google.maps.event.addDomListener(window, 'load', initMap());
     		})
     		.error(function(response){
-			//console.log(response);
+				//console.log(response);
 				alert('Đã xảy ra lỗi, vui lòng thử lại');
 			});
     	};
+    	//Change localtion
+    	$scope.editLngLat = function(){
+    		marker.setMap(null);
+    		mapMode = 'editLngLat';
+    		alert('Hãy chọn một tọa độ mới')
+
+    	};
+    	//Update
+    	$scope.update = function(){
+    		editedTown = {
+    				name: $scope.selectedTown.name, 
+    				lat: marker.position.lat(), 
+    				lon: marker.position.lng()
+    		};
+    		data=$.param(editedTown);
+    		$http({
+    			method: 'POST',
+    			url: '/admin/towns/'+$scope.selectedTown.id,
+    			data: data,
+    			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    		})
+    		.success(function(response){
+    			console.log(response);
+    			newLocation = undefined;
+    			alert('Cập nhật thành công');
+    			//Reload
+    			reloadRegion = true;
+    			$scope.getRegion();
+
+    			//Reset mode and map
+    			setMode(null);
+    			google.maps.event.addDomListener(window, 'load', initMap());
+    		})
+    		.error(function(response){
+				//console.log(response);
+				alert('Đã xảy ra lỗi, vui lòng thử lại');
+			});
+    	}
+    	//Delete
+    	$scope.delete = function(){
+    		if(confirm('Bạn có muốn xóa địa điểm này?'))
+	    		$http.delete('/admin/towns/'+$scope.selectedTown.id)
+	    		.then(function(response) {
+	    			console.log(response.data);
+	    			alert('Đã xóa thành công');
+	    			//Reload
+	    			reloadRegion = true;
+	    			$scope.getRegion();
+
+	    			//Reset mode and map
+	    			setMode(null);
+	    			google.maps.event.addDomListener(window, 'load', initMap());
+	    		}, function(rejection) {
+	    			console.log(rejection.data);
+	    		});
+    	}
     });
 </script>
 @stop
