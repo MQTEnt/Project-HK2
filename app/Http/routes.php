@@ -36,3 +36,11 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::post('towns/{town_id}', 'TownController@update');
 	Route::delete('towns/{town_id}', 'TownController@destroy');
 });
+Route::auth();
+Route::get('/home', 'HomeController@index');
+Route::post('/postConfirm', 'Auth\AuthController@postConfirm');
+
+Route::get('/checkFunction', function(){
+	$user = App\User::where('email', 'mrc@gmail.com')->first();
+	var_dump($user->stat);
+});
