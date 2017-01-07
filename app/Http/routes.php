@@ -39,8 +39,3 @@ Route::group(['prefix' => 'admin'], function(){
 Route::auth();
 Route::get('/home', 'HomeController@index');
 Route::post('/postConfirm', 'Auth\AuthController@postConfirm');
-
-Route::get('/checkFunction', function(){
-	$user = App\User::where('email', 'mrc@gmail.com')->first();
-	var_dump($user->stat);
-});

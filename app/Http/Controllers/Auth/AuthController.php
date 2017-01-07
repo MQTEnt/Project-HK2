@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests\ConfirmFormRequest;
 use Hash;
+use Twilio;
 class AuthController extends Controller
 {
     /*
@@ -70,16 +71,32 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'phone' => $data['phone'],
-            'organization' => $data['organization'],
-            'address' => $data['address'],
-            'stat' => 0,
-            'key' => str_random(6),
-        ]);
+        // User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => bcrypt($data['password']),
+        //     'phone' => $data['phone'],
+        //     'organization' => $data['organization'],
+        //     'address' => $data['address'],
+        //     'stat' => 0,
+        //     'key' => str_random(6),
+        // ]);
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
+        $user->phone = $data['phone'];
+        $user->organization = $data['organization'];
+        $user->address = $data['address'];
+        $user->stat = 0;
+        $user->key = str_random(6);
+        $user->save();
+
+        $number = substr($user->phone, 1);
+        $number = '+84'.$number;
+        $twilio = new Twilio('ACa1b9743c069051ae045d25911c10080d', '65ce0ba46b90f0ced7f59f09d5939748', '+14433414773');
+        //var_dump($twilio);
+        $twilio->message($number, 'Mã xác nhận là: '.$user->key);
     }
 
     public function login(Request $request)
