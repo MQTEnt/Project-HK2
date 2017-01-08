@@ -23,10 +23,10 @@
 		list-style-type:none;
 	}
 	.label-district{
-		background: #395771;
+		background: #337ab7;
 	}
 	.label-town{
-		background: #a1a5a9;
+		background: #337ab7;
 	}
 	#pn-info{
 		margin-bottom: 5%;
@@ -95,7 +95,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-sm-10">
-										<button id="btn-locat" type="button" class="btn btn-success pull-right" ng-click="editLngLat()">Đổi tọa độ</button>
+										<button id="btn-locat" type="button" class="btn btn-success pull-right" ng-click="editLngLat()"><i class="fa fa-map-marker" aria-hidden="true"></i> Đổi tọa độ</button>
 										<button id="btn-create" type="button" class="btn btn-success pull-right" ng-click="store()" ng-disabled="!myForm.town_name.$valid">Tạo</button>
 									</div>
 								</div>

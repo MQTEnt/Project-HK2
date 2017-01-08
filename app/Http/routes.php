@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('admin.region');
-});
+Route::get('/', 'HomeController@index');
 
 /*
 * API

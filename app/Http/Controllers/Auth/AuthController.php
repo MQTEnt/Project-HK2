@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests\ConfirmFormRequest;
@@ -53,6 +54,20 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'name.required' => 'Không được để trống tên',
+            'email.required' => 'Không được để trống email',
+            'email.email' => 'Mời nhập đúng định dạng mail',
+            'email.unique' => 'Email đã được dùng',
+            'password.required' => 'Không được để trống mật khẩu',
+            'password.confirmed' => 'Mật khẩu nhập lại không trùng khớp',
+            'password.min' => 'Mật khẩu phải lớn hơn 6 kí tự',
+            'phone.required' => 'Không được để trống số điện thoại',
+            'phone.numeric' => 'Nhập đúng định dạng số điện thoại',
+            'phone.unique' => 'Số điện thoại đã được dùng',
+            'address.required' => 'Không được để trống địa chỉ',
+            'organization.required' => 'Không được để trống tên tổ chức'
+        ];
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -60,7 +75,7 @@ class AuthController extends Controller
             'phone' => 'required|numeric|unique:users',
             'organization' => 'required',
             'address' => 'required'
-        ]);
+        ], $messages);
     }
 
     /**
@@ -162,5 +177,23 @@ class AuthController extends Controller
         return $this->getConfirm($request->get('email'),null);
         //Auth::guard($this->getGuard())->login($this->create($request->all()));
         //return redirect($this->redirectPath());
+    }
+
+    public function validateLogin(Request $request)
+    {
+        $messages = [
+            $this->loginUsername().'.required' => 'Không được để trống Email',
+            'password.required' => 'Không được để trống mật khẩu'
+        ];
+        $this->validate($request, [
+            $this->loginUsername() => 'required', 'password' => 'required',
+        ], $messages);
+    }
+
+    public function getFailedLoginMessage()
+    {
+        return Lang::has('auth.failed')
+                ? Lang::get('auth.failed')
+                : 'Email hoặc mật khẩu không khớp, mời thử lại';
     }
 }

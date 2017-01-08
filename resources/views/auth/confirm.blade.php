@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Confirm</div>
+                <div class="panel-heading">Xác minh số điện thoại</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/postConfirm') }}">
                         {{ csrf_field() }}
@@ -17,8 +17,11 @@
                             <strong>Lỗi</strong> {{$message}}
                         </div>
                         @endif
+                        <div class="form-group">
+                            <label class="col-md-12"><i class="fa fa-key" aria-hidden="true"></i> Nhập mã xác minh được gửi về số điện thoại đã đăng kí</label>
+                        </div>
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="key" class="col-md-4 control-label">Key</label>
+                            <label for="key" class="col-md-4 control-label">Mã xác minh</label>
 
                             <div class="col-md-6">
                                 <input id="key" type="text" class="form-control" name="key" value="{{ old('name') }}">

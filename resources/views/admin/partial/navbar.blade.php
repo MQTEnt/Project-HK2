@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Let's Support</a>
+        <a class="navbar-brand" href="#">Let's Support</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -88,13 +88,13 @@
                     <a href="#"><i class="fa fa-dashboard fa-fw"></i>Tổng quan</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-map"></i> Quản lý vùng miền</a>
+                    <a href="/admin/region"><i class="fa fa-map"></i> Quản lý vùng miền</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-users fa-fw"></i> Quản lý các tổ chức</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-check-square-o"></i> Cấp phép đăng ký cứu trợ</a>
+                    <a href="/admin/requirements"><i class="fa fa-check-square-o"></i> Cấp phép đăng ký cứu trợ</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-newspaper-o"></i> Xem thông tin cứu trợ</a>
