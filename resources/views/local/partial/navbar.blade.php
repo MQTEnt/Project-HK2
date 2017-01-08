@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Let's Support</a>
+        <a class="navbar-brand" href="#">Let's Support</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -85,16 +85,16 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="#"><i class="fa fa-dashboard fa-fw"></i> Gửi yêu cầu cứu trợ</a>
+                    <a href="{{route('requirements.index')}}"><i class="fa fa-paper-plane" aria-hidden="true"></i> Gửi yêu cầu cứu trợ</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-map"></i> Xem thông tin cứu trợ</a>
+                    <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Xem thông tin cứu trợ</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> Xem lịch sử cứu trợ</a>
+                    <a href="#"><i class="fa fa-history" aria-hidden="true"></i> Xem lịch sử cứu trợ</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-check-square-o"></i> Tra cứu</a>
+                    <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Tra cứu</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-area-chart fa-fw"></i> Thống kê</a>

@@ -31,10 +31,16 @@ Route::get('/town/{town_id}', function($town_id){
 Route::group(['prefix' => 'admin'], function(){
 	//Region
 	Route::get('region', ['as' => 'region.index', 'uses' => 'RegionController@index']);
+	
 	//Town
 	Route::post('towns', 'TownController@store');
 	Route::post('towns/{town_id}', 'TownController@update');
 	Route::delete('towns/{town_id}', 'TownController@destroy');
+	
+	//Requirement
+	Route::get('requirements/{requirement_id}', ['as' => 'admin.requirements.show', 'uses' => 'Admin\RequirementController@show']);
+	Route::get('requirements', ['as' => 'admin.requirements.index', 'uses' => 'Admin\RequirementController@index']);
+	Route::get('requirements/{requirement_id}/{newStat}', 'Admin\RequirementController@changeStat');
 });
 
 /*

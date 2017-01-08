@@ -1,10 +1,10 @@
-@extends('local.layout.master')
+@extends('admin.layout.master')
 @section('css.section')
 @stop
 @section('body.content')
 <section class="content">
 	<div class="container-fluid">
-		<p><a href="{{route('requirements.index')}}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Trở lại danh sách</a></p>
+		<p><a href="{{url('/admin/requirements')}}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Trở lại danh sách</a></p>
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<div id="map" style="width:auto; height:300px"></div>
@@ -60,10 +60,16 @@
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 50px;">
-			<div class="col-sm-5 pull-right">
-				<a href="{{route('requirements.edit',$requirement->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-wrench"></span> Cập nhật</a>
-				<a id="btn-delete" href="{{route('requirements.destroy', $requirement->id)}}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
+			@if($requirement->stat == 0)
+			<div class="col-sm-5 col-sm-offset-5">
+				<a href="/admin/requirements/{{$requirement->id}}/accept" class="btn btn-success"><i class="fa fa-check-square-o" aria-hidden="true"></i> Đồng ý</a>
+				<a href="/admin/requirements/{{$requirement->id}}/deny" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i> Từ chối</a>
 			</div>
+			@else
+			<div class="col-sm-5 col-sm-offset-5">
+				<a href="/admin/requirements/{{$requirement->id}}/pending" class="btn btn-warning"><i class="fa fa-history" aria-hidden="true"></i> Duyệt lại</a>
+			</div>
+			@endif
 		</div>
 	</div>
 </section>
@@ -95,9 +101,7 @@
 </script>
 <script>
 	$(document).ready(function(){
-		$('#btn-delete').click(function(){
-			return confirm('Bạn có chắc muốn xóa yêu cầu cứu trợ này?');
-		});
+		
 	});
 </script>
 @stop

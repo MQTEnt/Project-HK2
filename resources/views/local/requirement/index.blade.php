@@ -65,7 +65,11 @@
 										@if($requirement->stat==0)
 											<i class="fa fa-question-circle-o" aria-hidden="true"></i> <i>Chưa xác nhận</i>
 										@else
+											@if($requirement->stat==1)
 											<i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b>
+											@else
+											<i class="fa fa-times" aria-hidden="true"></i> <b>Đã từ chối</b>
+											@endif
 										@endif
 									</td>
 								</tr>
