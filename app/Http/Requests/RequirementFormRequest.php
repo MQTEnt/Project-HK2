@@ -24,7 +24,7 @@ class RequirementFormRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|unique:requirements,id',
+            'name' => 'required',
             'info' => 'required',
             'town_id' => 'numeric'
         ];
@@ -32,7 +32,6 @@ class RequirementFormRequest extends Request
     public function messages(){
         return [
             'name.required' => 'Mời nhập tên của dự án yêu cầu cứu trợ',
-            'name.unique' => 'Tên dự án yêu cầu cứu trợ đã tồn tại, mời nhập tên khác',
             'info.required' => 'Mời nhập thông tin thiệt hại',
             'town_id.numeric' => 'Mời chọn một địa phương trong danh sách'
         ];
