@@ -36,6 +36,24 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::post('towns/{town_id}', 'TownController@update');
 	Route::delete('towns/{town_id}', 'TownController@destroy');
 });
+
+/*
+* Local Route
+*/
+Route::group(['prefix' => 'local'], function(){
+	//Requirement
+	Route::get('requirements', ['as' => 'requirements.index', 'uses' => 'RequirementController@index']);
+	Route::get('requirements/create', ['as' => 'requirements.create', 'uses' => 'RequirementController@create']);
+	Route::post('requirements/store', ['as' => 'requirements.store', 'uses' => 'RequirementController@store']);
+	Route::get('requirements/{requirement_id}', ['as' => 'requirements.show', 'uses' => 'RequirementController@show']);
+	Route::get('requirements/{requirement_id}/edit', ['as' => 'requirements.edit', 'uses' => 'RequirementController@edit']);
+	Route::put('requirements/{requirement_id}', ['as' => 'requirements.update', 'uses' => 'RequirementController@update']);
+	Route::get('requirements/{requirement_id}/delete', ['as' => 'requirements.destroy', 'uses' => 'RequirementController@destroy']);
+});
+
 Route::auth();
 Route::get('/home', 'HomeController@index');
+//Confirm account
 Route::post('/postConfirm', 'Auth\AuthController@postConfirm');
+
+

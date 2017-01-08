@@ -10,4 +10,8 @@ class Town extends Model
     public function districts() {
 		return $this->belongsTo('App\District', 'district_id', 'id');
 	}
+	public function requirements()
+	{
+		return $this->hasMany('App\Requirement', 'town_id');
+	}
 }
