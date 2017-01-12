@@ -46,13 +46,23 @@ Route::group(['prefix' => 'admin'], function(){
 */
 Route::group(['prefix' => 'local'], function(){
 	//Requirement
-	Route::get('requirements', ['as' => 'requirements.index', 'uses' => 'RequirementController@index']);
-	Route::get('requirements/create', ['as' => 'requirements.create', 'uses' => 'RequirementController@create']);
-	Route::post('requirements/store', ['as' => 'requirements.store', 'uses' => 'RequirementController@store']);
-	Route::get('requirements/{requirement_id}', ['as' => 'requirements.show', 'uses' => 'RequirementController@show']);
-	Route::get('requirements/{requirement_id}/edit', ['as' => 'requirements.edit', 'uses' => 'RequirementController@edit']);
-	Route::put('requirements/{requirement_id}', ['as' => 'requirements.update', 'uses' => 'RequirementController@update']);
-	Route::get('requirements/{requirement_id}/delete', ['as' => 'requirements.destroy', 'uses' => 'RequirementController@destroy']);
+	Route::get('requirements', ['as' => 'local.requirements.index', 'uses' => 'Local\RequirementController@index']);
+	Route::get('requirements/create', ['as' => 'local.requirements.create', 'uses' => 'Local\RequirementController@create']);
+	Route::post('requirements/store', ['as' => 'local.requirements.store', 'uses' => 'Local\RequirementController@store']);
+	Route::get('requirements/{requirement_id}', ['as' => 'local.requirements.show', 'uses' => 'Local\RequirementController@show']);
+	Route::get('requirements/{requirement_id}/edit', ['as' => 'local.requirements.edit', 'uses' => 'Local\RequirementController@edit']);
+	Route::put('requirements/{requirement_id}', ['as' => 'local.requirements.update', 'uses' => 'Local\RequirementController@update']);
+	Route::get('requirements/{requirement_id}/delete', ['as' => 'local.requirements.destroy', 'uses' => 'Local\RequirementController@destroy']);
+});
+
+/*
+* Organization
+*/
+Route::group(['prefix' => 'organization'], function(){
+	//Requirement
+	Route::get('requirements', function(){
+		return view('organization.requirement.index');
+	});
 });
 
 Route::auth();

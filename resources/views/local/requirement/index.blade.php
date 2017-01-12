@@ -6,7 +6,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-				<a href="{{route('requirements.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Yêu cầu cứu trợ</a>
+				<a href="{{route('local.requirements.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Yêu cầu cứu trợ</a>
 			</div>
 		</div>
 		<br>
@@ -15,7 +15,7 @@
 			<div class="col-sm-12">
 				<div class="alert alert-success">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					<strong>Thông báo: </strong>Bạn vừa mới thêm một yêu cầu cứu trợ, click để xem chi tiết <a href="{{route('requirements.show', Session::get('new_requirement_id'))}}"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
+					<strong>Thông báo: </strong>Bạn vừa mới thêm một yêu cầu cứu trợ, click để xem chi tiết <a href="{{route('local.requirements.show', Session::get('new_requirement_id'))}}"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
 				</div>
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 			<div class="col-sm-12">
 				<div class="alert alert-warning">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					<strong>Thông báo: </strong>Bạn vừa mới cập nhật một yêu cầu cứu trợ, click để xem chi tiết <a href="{{route('requirements.show', Session::get('update_requirement_id'))}}"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
+					<strong>Thông báo: </strong>Bạn vừa mới cập nhật một yêu cầu cứu trợ, click để xem chi tiết <a href="{{route('local.requirements.show', Session::get('update_requirement_id'))}}"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@
 @section('body.content')
 <section class="content">
 	<div class="container-fluid">
-		<p><a href="{{route('requirements.index')}}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Trở lại danh sách</a></p>
+		<p><a href="{{route('local.requirements.index')}}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Trở lại danh sách</a></p>
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<div id="map" style="width:auto; height:300px"></div>
@@ -61,8 +61,8 @@
 		</div>
 		<div class="row" style="margin-bottom: 50px;">
 			<div class="col-sm-5 pull-right">
-				<a href="{{route('requirements.edit',$requirement->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-wrench"></span> Cập nhật</a>
-				<a id="btn-delete" href="{{route('requirements.destroy', $requirement->id)}}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
+				<a href="{{route('local.requirements.edit',$requirement->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-wrench"></span> Cập nhật</a>
+				<a id="btn-delete" href="{{route('local.requirements.destroy', $requirement->id)}}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
 			</div>
 		</div>
 	</div>

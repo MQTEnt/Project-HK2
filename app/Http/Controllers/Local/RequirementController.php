@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Local;
 
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\District;
 use App\Requirement;
@@ -29,7 +30,7 @@ class RequirementController extends Controller
 		$requirement->desc = $request->get('desc');
 		$requirement->town_id = $request->get('town_id');
 		$requirement->save();
-		return redirect()->route('requirements.index')->with(['new_requirement_id' => $requirement->id]);
+		return redirect()->route('local.requirements.index')->with(['new_requirement_id' => $requirement->id]);
 	}
 	public function show($id){
 		$requirement = Requirement::find($id);
@@ -48,11 +49,11 @@ class RequirementController extends Controller
 			'desc' => $request->get('desc'),
 			'town_id' => $request->get('town_id')
 		]);
-		return redirect()->route('requirements.index')->with(['update_requirement_id' => $requirement->id]);
+		return redirect()->route('local.requirements.index')->with(['update_requirement_id' => $requirement->id]);
 	}
 	public function destroy($id){
 		$requirement = Requirement::find($id);
 		$requirement->delete();
-		return redirect()->route('requirements.index')->with(['delete_requirement_id' => $requirement->id]);
+		return redirect()->route('local.requirements.index')->with(['delete_requirement_id' => $requirement->id]);
 	}
 }

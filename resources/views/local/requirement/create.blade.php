@@ -4,8 +4,8 @@
 @section('body.content')
 <section class="content">
 	<div class="container-fluid">
-		<p><a href="{{route('requirements.index')}}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Trở lại danh sách</a></p>
-		<form class="form-horizontal" role="form" method="POST" action="{{route('requirements.store')}}">
+		<p><a href="{{route('local.requirements.index')}}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Trở lại danh sách</a></p>
+		<form class="form-horizontal" role="form" method="POST" action="{{route('local.requirements.store')}}">
 			{{ csrf_field() }}
 			<div class="form-group{{ $errors->has('town_id') ? ' has-error' : '' }}">
 				<label for="town_id" class="col-md-3 control-label">Địa phương</label>
