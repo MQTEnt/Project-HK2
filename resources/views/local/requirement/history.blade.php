@@ -58,7 +58,7 @@
 						<div class="modal-body">
 							<ul>
 								<li>Mã yêu cầu: YC001</li>
-								<li>Tên địa phương: Xã A, huyện B, tỉnh C</li>
+								<li>Tên địa phương: <a href="{{route('local.requirements.history-local')}}">Xã A, huyện B, tỉnh C</a></li>
 								<li>Ngày nhập yêu cầu: 11/01/2016</li>
 								<li>Trạng thái yêu cầu: <i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></li>
 								<li>Thiệt hại ...</li>
@@ -75,19 +75,19 @@
 							    </thead>
 							    <tbody>
 								    <tr>
-								        <td>Org001</td>
+								        <td><a href="{{route('organization.projects.history-organization')}}">Org001</a></td>
 								        <td>Cứu trợ lũ lụt 2016</td>
 								        <td>11/01/2017</td>
 								        <td><i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></td>
 								    </tr>
 								    <tr>
-								        <td>Org001</td>
+								        <td><a href="#">Org002</a></td>
 								        <td>Cứu trợ lũ lụt 2016</td>
 								        <td>11/01/2017</td>
 								        <td><i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></td>
 								    </tr>
 								    <tr>
-								        <td>Org001</td>
+								        <td><a href="#">Org003</a></td>
 								        <td>Cứu trợ lũ lụt 2016</td>
 								        <td>11/01/2017</td>
 								        <td><i class="fa fa-question-circle-o" aria-hidden="true"></i> <i>Chưa xác nhận</i></td>
@@ -96,7 +96,6 @@
 							</table>
 						</div>
 						<div class="modal-footer">
-							<a href="{{route('organization.projects.create')}}" class="btn btn-success"><i class="fa fa-share" aria-hidden="true"></i> Đăng kí</a>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 						</div>
 					</div>

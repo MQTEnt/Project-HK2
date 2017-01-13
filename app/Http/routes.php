@@ -45,6 +45,12 @@ Route::group(['prefix' => 'admin'], function(){
 * Local Route
 */
 Route::group(['prefix' => 'local'], function(){
+	Route::get('requirements/history-local', ['as' => 'local.requirements.history-local', function(){
+		return view('local.requirement.history-local');
+	}]);
+	Route::get('requirements/history', ['as' => 'local.requirements.history', function(){
+		return view('local.requirement.history');
+	}]);
 	//Requirement
 	Route::get('requirements', ['as' => 'local.requirements.index', 'uses' => 'Local\RequirementController@index']);
 	Route::get('requirements/create', ['as' => 'local.requirements.create', 'uses' => 'Local\RequirementController@create']);
@@ -63,12 +69,15 @@ Route::group(['prefix' => 'organization'], function(){
 	Route::get('requirements', ['as' => 'organization.requirements.index', function(){
 		return view('organization.requirement.index');
 	}]);
-	Route::get('requirements/create', ['as' => 'organization.requirements.create', function(){
-		return view('organization.requirement.create');
+	Route::get('projects/history-organization', ['as' => 'organization.projects.history-organization', function(){
+		return view('organization.project.history');
+	}]);
+	Route::get('projects/create', ['as' => 'organization.projects.create', function(){
+		return view('organization.project.create');
 	}]);
 	//Danh sách requirement đã đăng kí
-	Route::get('requirements/list', ['as' => 'organization.requirements.list', function(){
-		return view('organization.requirement.list');
+	Route::get('projects/list', ['as' => 'organization.projects.list', function(){
+		return view('organization.project.list');
 	}]);
 });
 

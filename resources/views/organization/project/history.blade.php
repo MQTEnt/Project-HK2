@@ -10,6 +10,9 @@
 <section class="content">
 	<div class="container-fluid">
 		<div class="row">
+			<p style="font-size: 150%" class="text-center">Danh sách các dự án của tổ chức <b>Org001</b></p>
+		</div>
+		<div class="row">
 			<div class="col-sm-12">
 				<table class="table table-hover">
 				    <thead>
@@ -20,12 +23,12 @@
 				      </tr>
 				    </thead>
 				    <tbody>
-					    <tr data-toggle="modal" data-target="#detail">
+					    <tr class="approval-project" data-toggle="modal" data-target="#detail">
 					        <td>DA001</td>
 					        <td>Cứu trợ lũ lụt 2016</td>
 					        <td><i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></td>
 					    </tr>
-					    <tr>
+					    <tr class="pending-project" data-toggle="modal" data-target="#detail">
 					       	<td>DA002</td>
 					        <td>Cứu trợ lũ lụt 5/2016</td>
 					        <td><i class="fa fa-question-circle-o" aria-hidden="true"></i> <i>Chưa xác nhận</i></td>
@@ -65,39 +68,29 @@
 								<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 									<label for="" class="col-md-4 control-label">Tên dự án cứu trợ</label>
 									<div class="col-md-7">
-										<input id="name" type="text" class="form-control" name="name" value="Dự án cứu trợ ABC">
-										@if ($errors->has('name'))
-										<span class="help-block">
-											<strong>{{ $errors->first('name') }}</strong>
-										</span>
-										@endif
+										<p class="form-control">Dự án cứu trợ ABC</p>
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label for="date" class="col-md-4 control-label">Thời gian từ</label>
 									<div class="col-md-3">
-										<input id="name" type="date" class="form-control" name="from_date" value="2016-01-11">
+										<p class="form-control">11/01/2016</p>
 									</div>
 									<label for="date" class="col-md-1 control-label">đến</label>
 									<div class="col-md-3">
-										<input id="name" type="date" class="form-control" name="to_date" value="2016-05-01">
+										<p class="form-control">01/05/2016</p>
 									</div>
 								</div>
 
 								<div class="form-group{{ $errors->has('items') ? ' has-error' : '' }}">
 									<label for="items" class="col-md-4 control-label">Danh sách vật phẩm</label>
 									<div class="col-md-7">
-										<textarea id="items" type="text" class="form-control" name="items" rows="5" cols="50">{{old('info')}}
+										<textarea id="items" type="text" class="form-control" name="items" rows="5" cols="50" disabled>{{old('info')}}
 											- 100 thùng mì tôm
 											- 100 yến gạo
 											- 20 triệu đồng
 										</textarea>
-										@if ($errors->has('items'))
-										<span class="help-block">
-											<strong>{{ $errors->first('items') }}</strong>
-										</span>
-										@endif
 									</div>
 								</div>
 
@@ -105,35 +98,24 @@
 									<label for="desc" class="col-md-4 control-label">Ghi chú</label>
 
 									<div class="col-md-7">
-										<textarea id="desc" type="text" class="form-control" name="desc" rows="5" cols="50">{{old('desc')}}</textarea>
-										@if ($errors->has('desc'))
-										<span class="help-block">
-											<strong>{{ $errors->first('desc') }}</strong>
-										</span>
-										@endif
 									</div>
 								</div>
 
-								<div class="form-group">
+								<div class="form-group" id="sltStat">
 									<label for="stat" class="col-md-4 control-label">Tình trạng</label>
 
 									<div class="col-md-7">
-										<select name="stat" class="form-control" style="font-family: FontAwesome, sans-serif;">
-											<option value="">&#xf252; Đang thực hiện</option>
-											<option value="">&#xf274; Kết thúc</option>
-											<option value="">&#xf06a; Hoãn dự án</option>
-										</select>
+										<p class="form-control"><i class="fa fa-hourglass-half" aria-hidden="true"></i> Đang thực hiện</p>
 									</div>
 								</div>
 							</form>
 						<div class="modal-footer">
-							<a href="{{route('organization.requirements.create')}}" class="btn btn-info"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> Cập nhật</a>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- End #listOrgModal -->
+			<!-- End #approval-project -->
 		</div>
 	</div>
 </section>

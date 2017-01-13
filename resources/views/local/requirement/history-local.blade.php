@@ -10,12 +10,14 @@
 <section class="content">
 	<div class="container-fluid">
 		<div class="row">
+			<p class="text-center" style="font-size: 150%">Lịch sử đăng kí cứu trợ của <b>Xã A, huyện B, tỉnh C</b></p>
+		</div>
+		<div class="row">
 			<div class="col-sm-12">
 				<table class="table table-hover">
 				    <thead>
 				      <tr>
 				        <th>Mã yêu cầu</th>
-				        <th>Tên địa phương</th>
 				        <th>Tên yêu cầu</th>
 				        <th>Ngày nhập yêu cầu</th>
 				        <th>Trạng thái yêu cầu</th>
@@ -24,21 +26,18 @@
 				    <tbody>
 					    <tr data-toggle="modal" data-target="#detail">
 					        <td>YC001</td>
-					        <td>Xã A, huyện B, tỉnh C</td>
 					        <td>Cứu trợ lũ lụt 2016</td>
 					        <td>11/01/2017</td>
 					        <td><i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></td>
 					    </tr>
 					    <tr>
 					        <td>YC002</td>
-					        <td>Xã X, huyện Y, tỉnh Z</td>
-					        <td>Cứu trợ Xã X 2016</td>
+					        <td>Cứu trợ sạt lở đất</td>
 					        <td>10/01/2016</td>
 					        <td><i class="fa fa-question-circle-o" aria-hidden="true"></i> <i>Chưa xác nhận</i></td>
 					    </tr>
 					    <tr>
 					        <td>YC003</td>
-					        <td>Xã M, huyện P, tỉnh Q</td>
 					        <td>Cứu trợ 2016</td>
 					        <td>10/01/2016</td>
 					        <td><i class="fa fa-question-circle-o" aria-hidden="true"></i> <i>Chưa xác nhận</i></td>
@@ -58,7 +57,7 @@
 						<div class="modal-body">
 							<ul>
 								<li>Mã yêu cầu: YC001</li>
-								<li>Tên địa phương: Xã A, huyện B, tỉnh C</li>
+								<li>Tên địa phương: <a href="#">Xã A, huyện B, tỉnh C</a></li>
 								<li>Ngày nhập yêu cầu: 11/01/2016</li>
 								<li>Trạng thái yêu cầu: <i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></li>
 								<li>Thiệt hại ...</li>
@@ -75,19 +74,19 @@
 							    </thead>
 							    <tbody>
 								    <tr>
-								        <td>Org001</td>
+								        <td><a href="#">Org001</a></td>
 								        <td>Cứu trợ lũ lụt 2016</td>
 								        <td>11/01/2017</td>
 								        <td><i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></td>
 								    </tr>
 								    <tr>
-								        <td>Org001</td>
+								        <td><a href="#">Org001</a></td>
 								        <td>Cứu trợ lũ lụt 2016</td>
 								        <td>11/01/2017</td>
 								        <td><i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></td>
 								    </tr>
 								    <tr>
-								        <td>Org001</td>
+								        <td><a href="#">Org001</a></td>
 								        <td>Cứu trợ lũ lụt 2016</td>
 								        <td>11/01/2017</td>
 								        <td><i class="fa fa-question-circle-o" aria-hidden="true"></i> <i>Chưa xác nhận</i></td>
@@ -96,7 +95,6 @@
 							</table>
 						</div>
 						<div class="modal-footer">
-							<a href="{{route('organization.projects.create')}}" class="btn btn-success"><i class="fa fa-share" aria-hidden="true"></i> Đăng kí</a>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 						</div>
 					</div>
