@@ -60,9 +60,16 @@ Route::group(['prefix' => 'local'], function(){
 */
 Route::group(['prefix' => 'organization'], function(){
 	//Requirement
-	Route::get('requirements', function(){
+	Route::get('requirements', ['as' => 'organization.requirements.index', function(){
 		return view('organization.requirement.index');
-	});
+	}]);
+	Route::get('requirements/create', ['as' => 'organization.requirements.create', function(){
+		return view('organization.requirement.create');
+	}]);
+	//Danh sách requirement đã đăng kí
+	Route::get('requirements/list', ['as' => 'organization.requirements.list', function(){
+		return view('organization.requirement.list');
+	}]);
 });
 
 Route::auth();

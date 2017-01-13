@@ -85,10 +85,10 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="{{route('local.requirements.index')}}"><i class="fa fa-paper-plane" aria-hidden="true"></i> Đăng kí cứu trợ</a>
+                    <a href="{{route('organization.requirements.index')}}"><i class="fa fa-paper-plane" aria-hidden="true"></i> Đăng kí cứu trợ</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Cập nhật cứu trợ</a>
+                    <a href="{{route('organization.requirements.list')}}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Cập nhật cứu trợ</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-history" aria-hidden="true"></i> Xem lịch sử cứu trợ</a>

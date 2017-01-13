@@ -19,8 +19,8 @@ class MakeTownsTable extends Migration
             $table->foreign('district_id')
                     ->references('id')->on('districts')
                     ->onDelete('cascade');
-            $table->float('lat');
-            $table->float('lon');
+            $table->string('lat');
+            $table->string('lon');
             $table->tinyInteger('stat');
             $table->string('desc');
             $table->timestamps();
