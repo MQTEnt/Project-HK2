@@ -39,6 +39,11 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('requirements/{requirement_id}', ['as' => 'admin.requirements.show', 'uses' => 'Admin\RequirementController@show']);
 	Route::get('requirements', ['as' => 'admin.requirements.index', 'uses' => 'Admin\RequirementController@index']);
 	Route::get('requirements/{requirement_id}/{newStat}', 'Admin\RequirementController@changeStat');
+
+	//Project
+	Route::get('projects', ['as' => 'admin.projects.index', function(){
+		return view('admin.project.index');
+	}]);
 });
 
 /*
@@ -75,9 +80,13 @@ Route::group(['prefix' => 'organization'], function(){
 	Route::get('projects/create', ['as' => 'organization.projects.create', function(){
 		return view('organization.project.create');
 	}]);
-	//Danh sách requirement đã đăng kí
+	//Danh sách các project (của 1 tổ chức)
 	Route::get('projects/list', ['as' => 'organization.projects.list', function(){
 		return view('organization.project.list');
+	}]);
+	//Danh sách toàn bộ project (của tất cả các tổ chức)
+	Route::get('projects', ['as' => 'organization.projects.index', function(){
+		return view('organization.project.index');
 	}]);
 });
 

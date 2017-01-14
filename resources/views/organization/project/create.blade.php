@@ -55,6 +55,17 @@
 					@endif
 				</div>
 			</div>
+			
+			<div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
+				<label for="desc" class="col-md-3 control-label">Bản kế hoạch</label>
+				<div class="col-sm-5">
+					<label class="btn btn-default btn-file">
+						<i class="fa fa-cloud-upload" aria-hidden="true"></i> Browse <input type="file" class="hidden">
+					</label>
+					<span>File <i>.doc</i> hoặc <i>.pdf</i></span>
+				</div>
+			</div>
+
 			<div class="form-group">
 				<div class="col-md-8">
 					<input type="submit" value="Đăng ký" class="btn btn-success pull-right">

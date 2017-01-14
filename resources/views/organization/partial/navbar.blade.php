@@ -85,7 +85,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Xem thông tin cứu trợ</a>
+                    <a href="{{route('organization.projects.index')}}"><i class="fa fa-info-circle" aria-hidden="true"></i> Xem thông tin cứu trợ</a>
                 </li>
                 <li>
                     <a href="{{route('organization.requirements.index')}}"><i class="fa fa-paper-plane" aria-hidden="true"></i> Đăng kí cứu trợ</a>

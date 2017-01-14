@@ -94,7 +94,10 @@
                     <a href="#"><i class="fa fa-users fa-fw"></i> Quản lý các tổ chức</a>
                 </li>
                 <li>
-                    <a href="/admin/requirements"><i class="fa fa-check-square-o"></i> Cấp phép đăng ký cứu trợ</a>
+                    <a href="/admin/requirements"><i class="fa fa-files-o" aria-hidden="true"></i> Quản lý yêu cầu cứu trợ</a>
+                </li>
+                <li>
+                    <a href="{{route('admin.projects.index')}}"><i class="fa fa-list-alt" aria-hidden="true"></i> Quản lý đăng kí cứu trợ</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-newspaper-o"></i> Xem thông tin cứu trợ</a>
