@@ -34,6 +34,7 @@
     <!-- AngularJS -->
     <script src="/js/angular.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBJZuC9pIER2R-A1bHmIU9swuSfGclEHSk"></script>
+    @yield('js.section')
     </head>
 
     <body>
@@ -60,6 +61,7 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="/js/sb-admin-2.min.js"></script>
+        @yield('js.end-section')
 </body>
 
 </html>

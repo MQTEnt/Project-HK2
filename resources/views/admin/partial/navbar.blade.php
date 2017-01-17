@@ -91,7 +91,7 @@
                     <a href="/admin/region"><i class="fa fa-map"></i> Quản lý vùng miền</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> Quản lý các tổ chức</a>
+                    <a href="{{route('admin.orgs.index')}}"><i class="fa fa-users fa-fw"></i> Quản lý các tổ chức</a>
                 </li>
                 <li>
                     <a href="/admin/requirements"><i class="fa fa-files-o" aria-hidden="true"></i> Quản lý yêu cầu cứu trợ</a>
@@ -102,8 +102,20 @@
                 <li>
                     <a href="#"><i class="fa fa-newspaper-o"></i> Xem thông tin cứu trợ</a>
                 </li>
+                
                 <li>
-                    <a href="#"><i class="fa fa-area-chart fa-fw"></i> Thống kê</a>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Thống kê<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{route('admin.charts.list-requirements')}}">Phân loại yêu cầu cứu trợ</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.charts.list-projects')}}">Đánh giá dự án cứu trợ</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.charts.index')}}">Xem thống kê</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

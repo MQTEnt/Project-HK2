@@ -44,6 +44,22 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('projects', ['as' => 'admin.projects.index', function(){
 		return view('admin.project.index');
 	}]);
+
+	//Chart
+	Route::get('charts/list-requirements', ['as' => 'admin.charts.list-requirements', function(){
+		return view('admin.chart.list-requirements');
+	}]);
+	Route::get('charts/list-projects', ['as' => 'admin.charts.list-projects', function(){
+		return view('admin.chart.list-projects');
+	}]);
+	Route::get('charts', ['as' => 'admin.charts.index', function(){
+		return view('admin.chart.index');
+	}]);
+
+	//Organization
+	Route::get('orgs', ['as' => 'admin.orgs.index', function(){
+		return view('admin.orgs.index');
+	}]);
 });
 
 /*
