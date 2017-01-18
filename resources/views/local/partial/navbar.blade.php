@@ -88,16 +88,16 @@
                     <a href="{{route('local.requirements.index')}}"><i class="fa fa-paper-plane" aria-hidden="true"></i> Gửi yêu cầu cứu trợ</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Xem thông tin cứu trợ</a>
+                    <a href="{{route('local.projects.index')}}"><i class="fa fa-info-circle" aria-hidden="true"></i> Xem thông tin cứu trợ</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-history" aria-hidden="true"></i> Xem lịch sử cứu trợ</a>
+                    <a href="{{route('local.requirements.history')}}"><i class="fa fa-history" aria-hidden="true"></i> Xem lịch sử cứu trợ</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Tra cứu</a>
+                    <a href="{{route('local.search.index')}}"><i class="fa fa-search" aria-hidden="true"></i> Tra cứu</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-area-chart fa-fw"></i> Thống kê</a>
+                    <a href="{{route('local.charts.index')}}"><i class="fa fa-area-chart fa-fw"></i> Thống kê</a>
                 </li>
             </ul>
         </div>

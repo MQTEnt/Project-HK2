@@ -1,4 +1,4 @@
-@extends('organization.layout.master')
+@extends('local.layout.master')
 @section('css.section')
 <style>
 	table{

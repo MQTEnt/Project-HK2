@@ -56,6 +56,9 @@
 							<h4 class="modal-title">Thông tin chi tiết</h4>
 						</div>
 						<div class="modal-body">
+							<div>
+								<div id="map" style="width:auto; height:200px"></div>
+							</div>
 							<ul>
 								<li>Mã yêu cầu: YC001</li>
 								<li>Tên địa phương: Xã A, huyện B, tỉnh C</li>
@@ -106,4 +109,30 @@
 		</div>
 	</div>
 </section>
+<script>
+  var marker;
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 13,
+      center: {lat: 21.401933838235188, lng: 104.78759765625}
+    });
+
+    marker = new google.maps.Marker({
+      map: map,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+      position: {lat: 21.401933838235188, lng: 104.78759765625}
+    });
+    marker.addListener('click', toggleBounce);
+  }
+
+  function toggleBounce() {
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+  google.maps.event.addDomListener(window, 'load', initMap());
+</script>
 @stop

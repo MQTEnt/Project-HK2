@@ -66,6 +66,13 @@ Route::group(['prefix' => 'admin'], function(){
 * Local Route
 */
 Route::group(['prefix' => 'local'], function(){
+	Route::get('projects/history-organization', ['as' => 'local.projects.history-organization', function(){
+		return view('local.project.history');
+	}]);
+	//Danh sách toàn bộ project (của tất cả các tổ chức)
+	Route::get('projects', ['as' => 'local.projects.index', function(){
+		return view('local.project.index');
+	}]);
 	Route::get('requirements/history-local', ['as' => 'local.requirements.history-local', function(){
 		return view('local.requirement.history-local');
 	}]);
@@ -80,6 +87,14 @@ Route::group(['prefix' => 'local'], function(){
 	Route::get('requirements/{requirement_id}/edit', ['as' => 'local.requirements.edit', 'uses' => 'Local\RequirementController@edit']);
 	Route::put('requirements/{requirement_id}', ['as' => 'local.requirements.update', 'uses' => 'Local\RequirementController@update']);
 	Route::get('requirements/{requirement_id}/delete', ['as' => 'local.requirements.destroy', 'uses' => 'Local\RequirementController@destroy']);
+	//Search
+	Route::get('search', ['as' => 'local.search.index', 'uses' => function(){
+		return view('local.search.index');
+	}]);
+	//Chart
+	Route::get('charts', ['as' => 'local.charts.index', function(){
+		return view('local.chart.index');
+	}]);
 });
 
 /*
@@ -87,9 +102,17 @@ Route::group(['prefix' => 'local'], function(){
 */
 Route::group(['prefix' => 'organization'], function(){
 	//Requirement
+	Route::get('requirements/history', ['as' => 'organization.requirements.history', function(){
+		return view('organization.requirement.history');
+	}]);
+	Route::get('requirements/history-local', ['as' => 'organization.requirements.history-local', function(){
+		return view('organization.requirement.history-local');
+	}]);
+	//Requirement (Danh sách các Requirement để đăng kí Project)
 	Route::get('requirements', ['as' => 'organization.requirements.index', function(){
 		return view('organization.requirement.index');
 	}]);
+	//Project
 	Route::get('projects/history-organization', ['as' => 'organization.projects.history-organization', function(){
 		return view('organization.project.history');
 	}]);
@@ -103,6 +126,20 @@ Route::group(['prefix' => 'organization'], function(){
 	//Danh sách toàn bộ project (của tất cả các tổ chức)
 	Route::get('projects', ['as' => 'organization.projects.index', function(){
 		return view('organization.project.index');
+	}]);
+	//Lịch sử cứu trợ của 1 tổ chức
+	Route::get('projects/history-organization', ['as' => 'organization.projects.history-organization', function(){
+		return view('organization.project.history-organization');
+	}]);
+
+	//Search
+	Route::get('search', ['as' => 'organization.search.index', 'uses' => function(){
+		return view('organization.search.index');
+	}]);
+
+	//Chart
+	Route::get('charts', ['as' => 'organization.charts.index', function(){
+		return view('organization.chart.index');
 	}]);
 });
 

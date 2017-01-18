@@ -61,6 +61,7 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="/js/sb-admin-2.min.js"></script>
+        @yield('js.end-section')
 </body>
 
 </html>

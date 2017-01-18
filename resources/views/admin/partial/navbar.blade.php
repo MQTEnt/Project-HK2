@@ -85,9 +85,6 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="#"><i class="fa fa-dashboard fa-fw"></i>Tổng quan</a>
-                </li>
-                <li>
                     <a href="/admin/region"><i class="fa fa-map"></i> Quản lý vùng miền</a>
                 </li>
                 <li>
@@ -99,10 +96,6 @@
                 <li>
                     <a href="{{route('admin.projects.index')}}"><i class="fa fa-list-alt" aria-hidden="true"></i> Quản lý đăng kí cứu trợ</a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-newspaper-o"></i> Xem thông tin cứu trợ</a>
-                </li>
-                
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Thống kê<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

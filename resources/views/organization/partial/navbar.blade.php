@@ -94,13 +94,13 @@
                     <a href="{{route('organization.projects.list')}}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Lịch sử đăng kí</a>
                 </li>
                 <li>
-                    <a href="{{route('local.requirements.history')}}"><i class="fa fa-history" aria-hidden="true"></i> Xem lịch sử cứu trợ</a>
+                    <a href="{{route('organization.requirements.history')}}"><i class="fa fa-history" aria-hidden="true"></i> Xem lịch sử cứu trợ</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Tra cứu</a>
+                    <a href="{{route('organization.search.index')}}"><i class="fa fa-search" aria-hidden="true"></i> Tra cứu</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-area-chart fa-fw"></i> Xem thống kê</a>
+                    <a href="{{route('organization.charts.index')}}"><i class="fa fa-area-chart fa-fw"></i> Xem thống kê</a>
                 </li>
             </ul>
         </div>

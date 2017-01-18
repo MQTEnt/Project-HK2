@@ -1,4 +1,4 @@
-@extends('local.layout.master')
+@extends('organization.layout.master')
 @section('css.section')
 <style>
 	table{
@@ -58,7 +58,7 @@
 						<div class="modal-body">
 							<ul>
 								<li>Mã yêu cầu: YC001</li>
-								<li>Tên địa phương: <a href="{{route('local.requirements.history-local')}}">Xã A, huyện B, tỉnh C</a></li>
+								<li>Tên địa phương: <a href="{{route('organization.requirements.history-local')}}">Xã A, huyện B, tỉnh C</a></li>
 								<li>Ngày nhập yêu cầu: 11/01/2016</li>
 								<li>Trạng thái yêu cầu: <i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></li>
 								<li>Thiệt hại ...</li>
@@ -75,7 +75,7 @@
 							    </thead>
 							    <tbody>
 								    <tr>
-								        <td><a href="{{route('local.projects.history-organization')}}">Org001</a></td>
+								        <td><a href="{{route('organization.projects.history-organization')}}">Org001</a></td>
 								        <td>Cứu trợ lũ lụt 2016</td>
 								        <td>11/01/2017</td>
 								        <td><i class="fa fa-check-square-o" aria-hidden="true"></i> <b>Đã xác nhận</b></td>
