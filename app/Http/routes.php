@@ -22,7 +22,16 @@ Route::get('/get-cities-districts', function(){
 Route::get('/town/{town_id}', function($town_id){
 	return App\Town::find($town_id);
 });
-
+Route::get('/requirement/{requirement_id}', function($requirement_id){
+	//with project is just temporary
+	return App\Requirement::with('towns', 'projects')->where('id', $requirement_id)->get();
+});
+Route::get('/message/seen/{message_id}', function($message_id){
+	$message = App\Message::find($message_id);
+	$message->opened = 1;
+	$message->save();
+	return ['stat' => 'success'];
+});
 /*
 * Admin Route
 */
@@ -102,23 +111,20 @@ Route::group(['prefix' => 'local'], function(){
 */
 Route::group(['prefix' => 'organization'], function(){
 	//Requirement
-	Route::get('requirements/history', ['as' => 'organization.requirements.history', function(){
-		return view('organization.requirement.history');
-	}]);
+	Route::get('requirements/history', ['as' => 'organization.requirements.history', 'uses' => 'Organization\RequirementController@history']);
 	Route::get('requirements/history-local', ['as' => 'organization.requirements.history-local', function(){
 		return view('organization.requirement.history-local');
 	}]);
 	//Requirement (Danh sách các Requirement để đăng kí Project)
-	Route::get('requirements', ['as' => 'organization.requirements.index', function(){
-		return view('organization.requirement.index');
-	}]);
+	Route::get('requirements', ['as' => 'organization.requirements.index', 'uses' => 'Organization\RequirementController@index']);
 	//Project
 	Route::get('projects/history-organization', ['as' => 'organization.projects.history-organization', function(){
 		return view('organization.project.history');
 	}]);
-	Route::get('projects/create', ['as' => 'organization.projects.create', function(){
-		return view('organization.project.create');
-	}]);
+	Route::get('projects/create/{requirement_id}', ['as' => 'organization.projects.create', 'uses' => 'Organization\ProjectController@create']);
+	Route::post('projects/store', ['as' => 'organization.project.store', 'uses' => 'Organization\ProjectController@store']);
+	Route::get('projects/change-stat/{type_noti}/{requirement_id}', 'Organization\ProjectController@changeStat');
+
 	//Danh sách các project (của 1 tổ chức)
 	Route::get('projects/list', ['as' => 'organization.projects.list', function(){
 		return view('organization.project.list');
@@ -143,9 +149,14 @@ Route::group(['prefix' => 'organization'], function(){
 	}]);
 });
 
+
 Route::auth();
 Route::get('/home', 'HomeController@index');
 //Confirm account
 Route::post('/postConfirm', 'Auth\AuthController@postConfirm');
-
-
+//Mail
+Route::get('/email', function(){
+	Mail::send('email', [], function($message){
+		$message->to('mqtent@gmail.com', 'Org')->subject('Email from Laravel');
+	});
+});

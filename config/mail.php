@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'mqtsnet@gmail.com', 'name' => "Let's Support"],
 
     /*
     |--------------------------------------------------------------------------

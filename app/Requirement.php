@@ -10,4 +10,8 @@ class Requirement extends Model
     public function towns() {
 		return $this->belongsTo('App\Town', 'town_id', 'id');
 	}
+	public function projects()
+	{
+		return $this->hasMany('App\Project', 'requirement_id');
+	}
 }

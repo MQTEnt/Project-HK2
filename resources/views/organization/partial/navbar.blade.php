@@ -13,48 +13,37 @@
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                <i class="fa fa-bell" aria-hidden="true"></i>
+                <?php
+                    //Default User
+                    $messages = App\Message::with('requirements')->where('opened', 0)->get();
+                ?> 
+                @if(count($messages) > 0)
+                    <span id="count-messages" class="badge">{{count($messages)}}</span>
+                @endif
+                <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-messages">
+                @foreach($messages as $message)
                 <li>
                     <a href="#">
                         <div>
-                            <strong>John Smith</strong>
+                            <strong>{{$message->requirements->towns->name.'/'.$message->requirements->towns->districts->name.'/'.$message->requirements->towns->districts->cities->name}}</strong>
+                            <span data-message-id="{{$message->id}}" class="seen-message pull-right" data-toggle="tooltip" title="Đã xem">
+                                <i class="fa fa-circle-o" aria-hidden="true"></i>
+                            </span>
                             <span class="pull-right text-muted">
-                                <em>Yesterday</em>
+                                <em>{{$message->created_at}}</em>
                             </span>
                         </div>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                        <div>{{$message->content}}</div>
                     </a>
                 </li>
                 <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <strong>John Smith</strong>
-                            <span class="pull-right text-muted">
-                                <em>Yesterday</em>
-                            </span>
-                        </div>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <strong>John Smith</strong>
-                            <span class="pull-right text-muted">
-                                <em>Yesterday</em>
-                            </span>
-                        </div>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                    </a>
-                </li>
-                <li class="divider"></li>
+                @endforeach
                 <li>
                     <a class="text-center" href="#">
-                        <strong>Read All Messages</strong>
+                        <strong>Xem lịch sử thông báo</strong>
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </li>
@@ -108,3 +97,18 @@
     </div>
     <!-- /.navbar-static-side -->
 </nav>
+<script>
+    $(document).ready(function(){
+        $('.seen-message').click(function(){
+            message_id = $(this).attr('data-message-id');
+            $.get('/message/seen/'+message_id, function(data, status){
+            })
+            li = $(this).parent().parent().parent();
+            li.fadeOut('slow');
+            li.next().fadeOut('slow');
+            count_message = parseInt($('#count-messages').text());
+            $('#count-messages').text(count_message-1);
+            return false;
+        });
+    });
+</script>

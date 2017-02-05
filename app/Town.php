@@ -14,4 +14,8 @@ class Town extends Model
 	{
 		return $this->hasMany('App\Requirement', 'town_id');
 	}
+	public function requirementsActive()
+	{
+		return $this->hasMany('App\Requirement', 'town_id')->where('requirements.stat', 1);
+	}
 }
