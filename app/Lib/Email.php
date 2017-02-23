@@ -5,8 +5,6 @@ use App\Message;
 use App\User;
 use Mail;
 class Email implements \SplObserver{
-    // public function __construct() {
-    // }
     public function update(\SplSubject $subject) {
         $user = User::find($subject->getUserId());
         Mail::send('email', ['content' => $subject->getContent()], function($message) use ($user){

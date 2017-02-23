@@ -5,8 +5,6 @@ use App\Message;
 use App\User;
 use Twilio;
 class Mobile implements \SplObserver{
-    // public function __construct() {
-    // }
     public function update(\SplSubject $subject) {
         $user = User::find($subject->getUserId());
         $number = substr($user->phone, 1);

@@ -30,7 +30,9 @@ class ProjectController extends Controller
 				'user_id' => 1,
 				'requirement_id' => $request->requirement_id,
 				'stat' => 0,
-				'plan' => 'temp/'.$filePlan->getClientOriginalName()
+				'plan' => 'temp/'.$filePlan->getClientOriginalName(),
+				'project_stat' => 0,
+				'progress' => 0
 			]); //Default user_id, requirement_id
 			return redirect()->route('organization.requirements.index');
 		}
@@ -48,5 +50,26 @@ class ProjectController extends Controller
 			$requirement->projects[0]->save();
 		}
 		return ['stat' => 'success'];
+	}
+	public function listProject(){
+		$projects = Project::all();
+		return view('organization.project.list', compact('projects'));
+	}
+	public function update($id, Request $request){
+		//coditional - stat
+		$project = Project::find($id);
+		if(($project->project_stat == 1 || $project->project_stat == 3) && $request->name != '')
+		{
+			$project->name = $request->name;
+			$project->items = $request->items;
+			$project->note = $request->note;
+			$project->from_date = $request->from_date;
+			$project->to_date = $request->to_date;
+			$project->project_stat = $request->project_stat;
+			$project->progress = $request->progress;
+			$project->save();
+			return ['stat' => 'success'];
+		}
+		return ['stat' => 'false'];
 	}
 }

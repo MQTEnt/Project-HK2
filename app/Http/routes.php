@@ -32,6 +32,31 @@ Route::get('/message/seen/{message_id}', function($message_id){
 	$message->save();
 	return ['stat' => 'success'];
 });
+Route::get('/project/{project_id}', function($project_id){
+	$project = App\Project::with('requirements', 'requirements.towns')->where('id', $project_id)->get();
+	return $project;
+});
+Route::get('/requirements', function(){
+	$requirements = App\Requirement::with('towns', 'towns.districts', 'towns.districts.cities')->get();
+	$listRequirement = [];
+	foreach($requirements as $requirement){
+		$item = 
+				[
+					'address'=> $requirement->towns->name.'/'.$requirement->towns->districts->name.'/'.$requirement->towns->districts->cities->name,
+					'date'=> $requirement->updated_at->format('d/m/Y'),
+					'description' => $requirement->desc,
+					'email' => 'email@gmail.com',
+					'latitude' => $requirement->towns->lat,
+					'longitude' => $requirement->towns->lon,
+					'phonenumber' => '0123456789',
+					'title' => $requirement->name,
+					'url' => '',
+					'urlToImage' => ''
+				];
+		array_push($listRequirement, $item);
+	}
+	return ['projects' => $listRequirement, 'sortBy' => 'top', 'source' => 'techcrunch', 'status' => 'ok'];
+});
 /*
 * Admin Route
 */
@@ -50,10 +75,9 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('requirements/{requirement_id}/{newStat}', 'Admin\RequirementController@changeStat');
 
 	//Project
-	Route::get('projects', ['as' => 'admin.projects.index', function(){
-		return view('admin.project.index');
-	}]);
-
+	Route::get('projects', ['as' => 'admin.projects.index', 'uses' => 'Admin\ProjectController@index']);
+	Route::get('projects/{id}/approve', ['as' => 'admin.projects.approve', 'uses' => 'Admin\ProjectController@approve']);
+	Route::post('projects/{id}/deny', ['as' => 'admin.projects.deny', 'uses' => 'Admin\ProjectController@deny']);
 	//Chart
 	Route::get('charts/list-requirements', ['as' => 'admin.charts.list-requirements', function(){
 		return view('admin.chart.list-requirements');
@@ -126,9 +150,9 @@ Route::group(['prefix' => 'organization'], function(){
 	Route::get('projects/change-stat/{type_noti}/{requirement_id}', 'Organization\ProjectController@changeStat');
 
 	//Danh sách các project (của 1 tổ chức)
-	Route::get('projects/list', ['as' => 'organization.projects.list', function(){
-		return view('organization.project.list');
-	}]);
+	Route::get('projects/list', ['as' => 'organization.projects.list', 'uses' => 'Organization\ProjectController@listProject']);
+	Route::post('projects/{id}/update', ['as' => 'organization.projects.update', 'uses' => 'Organization\ProjectController@update']);
+	
 	//Danh sách toàn bộ project (của tất cả các tổ chức)
 	Route::get('projects', ['as' => 'organization.projects.index', function(){
 		return view('organization.project.index');

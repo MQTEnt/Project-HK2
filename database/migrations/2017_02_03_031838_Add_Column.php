@@ -13,10 +13,10 @@ class AddColumn extends Migration
     public function up()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->integer('requirement_id')->unsigned();
-            $table->foreign('requirement_id')
-                    ->references('id')->on('requirements')
-                    ->onDelete('cascade');
+            // $table->integer('requirement_id')->unsigned();
+            // $table->foreign('requirement_id')
+            //         ->references('id')->on('requirements')
+            //         ->onDelete('cascade');
         });
     }
 
