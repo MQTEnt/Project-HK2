@@ -24,7 +24,7 @@ Route::get('/town/{town_id}', function($town_id){
 });
 Route::get('/requirement/{requirement_id}', function($requirement_id){
 	//with project is just temporary
-	return App\Requirement::with('towns', 'projects')->where('id', $requirement_id)->get();
+	return App\Requirement::with('towns', 'towns.districts', 'projects')->where('id', $requirement_id)->get();
 });
 Route::get('/message/seen/{message_id}', function($message_id){
 	$message = App\Message::find($message_id);
@@ -78,13 +78,12 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('projects', ['as' => 'admin.projects.index', 'uses' => 'Admin\ProjectController@index']);
 	Route::get('projects/{id}/approve', ['as' => 'admin.projects.approve', 'uses' => 'Admin\ProjectController@approve']);
 	Route::post('projects/{id}/deny', ['as' => 'admin.projects.deny', 'uses' => 'Admin\ProjectController@deny']);
+	Route::post('projects/{id}/rating', ['as' => 'admin.project.rating', 'uses' =>'Admin\ProjectController@rating']);
 	//Chart
 	Route::get('charts/list-requirements', ['as' => 'admin.charts.list-requirements', function(){
 		return view('admin.chart.list-requirements');
 	}]);
-	Route::get('charts/list-projects', ['as' => 'admin.charts.list-projects', function(){
-		return view('admin.chart.list-projects');
-	}]);
+	Route::get('charts/list-projects', ['as' => 'admin.charts.list-projects', 'uses' =>'Admin\ProjectController@listProject']);
 	Route::get('charts', ['as' => 'admin.charts.index', function(){
 		return view('admin.chart.index');
 	}]);
@@ -109,10 +108,8 @@ Route::group(['prefix' => 'local'], function(){
 	Route::get('requirements/history-local', ['as' => 'local.requirements.history-local', function(){
 		return view('local.requirement.history-local');
 	}]);
-	Route::get('requirements/history', ['as' => 'local.requirements.history', function(){
-		return view('local.requirement.history');
-	}]);
-	//Requirement
+	Route::get('requirements/history', ['as' => 'local.requirements.history', 'uses' => 'Local\RequirementController@history']);
+	//Requirement CRUD
 	Route::get('requirements', ['as' => 'local.requirements.index', 'uses' => 'Local\RequirementController@index']);
 	Route::get('requirements/create', ['as' => 'local.requirements.create', 'uses' => 'Local\RequirementController@create']);
 	Route::post('requirements/store', ['as' => 'local.requirements.store', 'uses' => 'Local\RequirementController@store']);
@@ -183,4 +180,10 @@ Route::get('/email', function(){
 	Mail::send('email', [], function($message){
 		$message->to('mqtent@gmail.com', 'Org')->subject('Email from Laravel');
 	});
+});
+
+Route::get('/testFunction', function(){
+	// return App\Requirement::with('getAvgProgress')->where('id', 26)->get();
+	$requirement = App\Requirement::find(26);
+	return $requirement;
 });

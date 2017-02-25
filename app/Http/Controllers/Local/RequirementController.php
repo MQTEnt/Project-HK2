@@ -73,4 +73,9 @@ class RequirementController extends Controller
 		$requirement->delete();
 		return redirect()->route('local.requirements.index')->with(['delete_requirement_id' => $requirement->id]);
 	}
+	public function history(){
+		//Default city_id = 1 [DEMO]
+		$districts = District::with('towns', 'towns.requirementsActive')->where('city_id', 1)->get();
+		return view('local.requirement.history', compact('districts'));
+	}
 }
