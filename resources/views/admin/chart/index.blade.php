@@ -13,12 +13,11 @@
 		</div>
 		<br>
 		<div class="row">
-			<div class="col-lg-6">
+			<!-- <div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<b>Thống kê nguyên nhân cứu trợ các tháng trong năm</b>
 					</div>
-					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="form-horizontal">
 							<p>Chọn năm:</p>
@@ -30,10 +29,8 @@
 						</div>
 						<div id="morris-bar-chart"></div>
 					</div>
-					<!-- /.panel-body -->
 				</div>
-				<!-- /.panel -->
-			</div>
+			</div> -->
 
 			<div class="col-lg-6">
                     <div class="panel panel-default">
@@ -42,13 +39,13 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                        	<div class="form-horizontal">
-                        		<p>Chọn năm:</p>
-                        		<select name="" class="form-control">
-                        			<option value="">2014</option>
-                        			<option value="">2015</option>
-                        			<option value="">2016</option>
-                        		</select>
+                        	<div style="overflow: hidden; margin-bottom: 20px;">
+                        		<div class="col-sm-6">
+                        			<input id="year" type="number" class="form-control">
+                        		</div>
+                        		<div class="col-sm-6">
+                        			<button id="btnSelectYear" class="btn btn-primary pull-right">Chọn</button>
+                        		</div>
                         	</div>
                         	<div class="flot-chart">
                                 <div class="flot-chart-content" id="flot-pie-chart"></div>
@@ -195,4 +192,40 @@
 <script src="/js/flot/jquery.flot.tooltip.min.js"></script>
 
 <script src="/js/data/morris-data.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#year').val(new Date().getFullYear());
+		$('#btnSelectYear').click(function(){
+			year = $('#year').val();
+			$.get('/requirements/reason/'+year,function(recievedData){
+		        data = recievedData;
+		        if(data.length == 0)
+		        {
+		        	$('.flot-chart').hide();
+		        	return	
+		        }
+		        $('.flot-chart').show();
+		        var plotObj = $.plot($("#flot-pie-chart"), data, {
+		            series: {
+		                pie: {
+		                    show: true
+		                }
+		            },
+		            grid: {
+		                hoverable: true
+		            },
+		            tooltip: true,
+		            tooltipOpts: {
+		                content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+		                shifts: {
+		                    x: 20,
+		                    y: 0
+		                },
+		                defaultTheme: false
+		            }
+		        });
+		   	});
+		});
+	});
+</script>
 @stop

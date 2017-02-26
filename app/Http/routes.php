@@ -57,6 +57,25 @@ Route::get('/requirements', function(){
 	}
 	return ['projects' => $listRequirement, 'sortBy' => 'top', 'source' => 'techcrunch', 'status' => 'ok'];
 });
+
+Route::get('/requirements/reason/{year}', function($year){
+	$requirements = DB::table('requirements')
+					->selectRaw('reason, count(reason) as count')
+					->where('reason', '<>', '0')
+					->whereYear('created_at', '=', $year)
+					->groupBy('reason')->get();
+	if(count($requirements) != 0)
+	{
+		$data = [];
+		foreach($requirements as $requirement)
+		{
+			$label = ['Lũ lụt', 'Hạn hán', 'Động đất', 'Sạt lở đất', 'Nguyên nhân khác'];
+			array_push($data, ['label' => $label[$requirement->reason-1], 'data' => $requirement->count]);
+		}
+		return $data;
+	}
+	return [];
+});
 /*
 * Admin Route
 */
@@ -70,19 +89,18 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::delete('towns/{town_id}', 'TownController@destroy');
 	
 	//Requirement
+	Route::get('requirements/history', ['as' => 'admin.requirements.history', 'uses' => 'Admin\RequirementController@history']);
 	Route::get('requirements/{requirement_id}', ['as' => 'admin.requirements.show', 'uses' => 'Admin\RequirementController@show']);
 	Route::get('requirements', ['as' => 'admin.requirements.index', 'uses' => 'Admin\RequirementController@index']);
 	Route::get('requirements/{requirement_id}/{newStat}', 'Admin\RequirementController@changeStat');
-
+	Route::post('requirements/{requirement_id}/evaluateRequirement', 'Admin\RequirementController@evaluateRequirement');
 	//Project
 	Route::get('projects', ['as' => 'admin.projects.index', 'uses' => 'Admin\ProjectController@index']);
 	Route::get('projects/{id}/approve', ['as' => 'admin.projects.approve', 'uses' => 'Admin\ProjectController@approve']);
 	Route::post('projects/{id}/deny', ['as' => 'admin.projects.deny', 'uses' => 'Admin\ProjectController@deny']);
 	Route::post('projects/{id}/rating', ['as' => 'admin.project.rating', 'uses' =>'Admin\ProjectController@rating']);
 	//Chart
-	Route::get('charts/list-requirements', ['as' => 'admin.charts.list-requirements', function(){
-		return view('admin.chart.list-requirements');
-	}]);
+	Route::get('charts/list-requirements', ['as' => 'admin.charts.list-requirements', 'uses' =>'Admin\RequirementController@evalRequirement']);
 	Route::get('charts/list-projects', ['as' => 'admin.charts.list-projects', 'uses' =>'Admin\ProjectController@listProject']);
 	Route::get('charts', ['as' => 'admin.charts.index', function(){
 		return view('admin.chart.index');

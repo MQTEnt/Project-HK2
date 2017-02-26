@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Requirement extends Model
 {
-    protected $fillable = ['name', 'info', 'desc', 'town_id', 'stat'];
+    protected $fillable = ['name', 'info', 'desc', 'town_id', 'stat', 'level', 'reason'];
 
     //Add extra attribute
     protected $attributes = ['avgProgress'];

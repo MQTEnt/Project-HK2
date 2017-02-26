@@ -91,7 +91,15 @@
                     <a href="{{route('admin.orgs.index')}}"><i class="fa fa-users fa-fw"></i> Quản lý các tổ chức</a>
                 </li>
                 <li>
-                    <a href="/admin/requirements"><i class="fa fa-files-o" aria-hidden="true"></i> Quản lý yêu cầu cứu trợ</a>
+                    <a href="/admin/requirements"><i class="fa fa-files-o" aria-hidden="true"></i> Quản lý yêu cầu cứu trợ<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/admin/requirements"">Cấp phép yêu cầu cứu trợ</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.requirements.history')}}">Tình hình cứu trợ</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="{{route('admin.projects.index')}}"><i class="fa fa-list-alt" aria-hidden="true"></i> Quản lý đăng kí cứu trợ</a>

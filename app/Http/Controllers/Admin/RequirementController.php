@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\District;
 use App\Requirement;
+use App\City;
 
 class RequirementController extends Controller
 {
@@ -34,5 +35,25 @@ class RequirementController extends Controller
 		if($newStat == 'pending')
 			return redirect()->route('admin.requirements.show', $id);
 		return redirect()->route('admin.requirements.index');
+	}
+	public function history(){
+		//Default city_id = 1 [DEMO]
+		$districts = District::with('towns', 'towns.requirementsActive')->where('city_id', 1)->get();
+		return view('admin.requirement.history', compact('districts'));
+	}
+	public function evalRequirement(){
+		$cities = City::with('districts', 'districts.towns', 'districts.towns.requirementsActive')->get();
+		return view('admin.chart.list-requirements', compact('cities'));
+	}
+	public function evaluateRequirement($id, Request $request){
+		$requirement = Requirement::find($id);
+		if(is_numeric($request->level) && is_numeric($request->reason))
+		{
+			$requirement->level = $request->level;
+			$requirement->reason = $request->reason;
+			$requirement->save();
+			return ['stat' => 'success'];
+		}
+		return ['stat' => 'false'];
 	}
 }
