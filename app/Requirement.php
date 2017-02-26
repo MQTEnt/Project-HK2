@@ -9,7 +9,7 @@ class Requirement extends Model
     protected $fillable = ['name', 'info', 'desc', 'town_id', 'stat', 'level', 'reason'];
 
     //Add extra attribute
-    protected $attributes = ['avgProgress'];
+    //protected $attributes = ['avgProgress'];
 
     //Make extra attribute available in the json response
     protected $appends = ['avgProgress'];
