@@ -221,7 +221,7 @@
 		$('.search .panel-title').click(function(){
 			$('.search .panel-body').slideToggle("slow");
 		});
-
+		var currentProjectStat;
 		//Progress bar
 		var progressBar = new Slider("input#progress-bar", {
 			// initial options object
@@ -246,7 +246,7 @@
 				$('#requirement_name').html('Tên yêu cầu cứu trợ: <b>'+project.requirements.name+'</b>');
 				$('#town_name').html('Địa phương: <b>'+project.requirements.towns.name+'</b>');
 				$('#requirement_info').html('Thiệt hại: <b>'+project.requirements.info+'</b>');
-
+				currentProjectStat = project.project_stat;
 				$('#validName').hide();
 				if(project.stat=='0' || project.stat=='2')
 				{
@@ -273,7 +273,9 @@
 		*/
 		$('#btnUpdate').click(function(){
 			//Valid
-			if($('#project_stat').val() == 2)
+			// console.log(currentProjectStat);
+			// return;
+			if(currentProjectStat == 2)
 			{
 				alert('Không thể cập nhật cho dự án đã hoàn thành');
 				return;

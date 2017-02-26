@@ -102,9 +102,7 @@ Route::group(['prefix' => 'admin'], function(){
 	//Chart
 	Route::get('charts/list-requirements', ['as' => 'admin.charts.list-requirements', 'uses' =>'Admin\RequirementController@evalRequirement']);
 	Route::get('charts/list-projects', ['as' => 'admin.charts.list-projects', 'uses' =>'Admin\ProjectController@listProject']);
-	Route::get('charts', ['as' => 'admin.charts.index', function(){
-		return view('admin.chart.index');
-	}]);
+	Route::get('charts', ['as' => 'admin.charts.index', 'uses' => 'Admin\ChartController@index']);
 
 	//Organization
 	Route::get('orgs', ['as' => 'admin.orgs.index', function(){

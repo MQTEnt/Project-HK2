@@ -242,19 +242,19 @@
 			$('#btnAccept').hide();
 			$('#btnDeny').hide();
 			$('#btnClose').show();
-			$('#sltStat').show();
+			// $('#sltStat').show();
 		});
 		$('.pending-project').click(function(){
 			$('#btnAccept').show();
 			$('#btnDeny').show();
 			$('#btnClose').hide();
-			$('#sltStat').hide();
+			// $('#sltStat').hide();
 		});
 		$('.deny-project').click(function(){
 			$('#btnAccept').hide();
 			$('#btnDeny').hide();
 			$('#btnClose').show();
-			$('#sltStat').show();
+			// $('#sltStat').show();
 		});
 
 		/*
@@ -282,6 +282,7 @@
 					$('#stat').css('display', 'none');
 				}
 				else{
+					$('#stat').css('display', 'inline');
 					if(project.project_stat == '1')
 					{
 						$('#project_stat').html('&#xf252; Đang thực hiện');
